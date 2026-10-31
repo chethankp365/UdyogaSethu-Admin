@@ -6,7 +6,7 @@ server:
       cookie:
         http-only: true
         same-site: strict
-        secure: true
+        secure: ${COOKIE_SECURE:false}
   error:
     include-stacktrace: never
     include-message: never
