@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="assets/banner.svg" alt="UdyogaSethu Admin Portal" width="100%"/>
+<img src="banner.svg" alt="UdyogaSethu Admin Portal" width="100%"/>
 
 <br/>
 
-<img src="assets/tagline.svg" alt="What the portal does" width="800"/>
+<img src="tagline.svg" alt="What the portal does" width="800"/>
 
 <br/>
 
@@ -18,7 +18,7 @@
 
 [**Overview**](#-overview) ·
 [**Live Snapshot**](#-ecosystem-at-a-glance) ·
-[**Architecture**](#-architecture) ·
+[**Architecture**](#️-architecture) ·
 [**Screenshots**](#-screenshots) ·
 [**Modules**](#-admin-modules) ·
 [**Security**](#-security-by-design) ·
@@ -26,7 +26,7 @@
 
 </div>
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🌉 Overview
 
@@ -67,112 +67,67 @@
 </tr>
 </table>
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 📊 Ecosystem at a Glance
 
 <div align="center">
-<img src="assets/stats.svg" alt="Platform statistics" width="100%"/>
+<img src="stats.svg" alt="Platform statistics" width="100%"/>
 </div>
 
 <sub>Figures come from the seeded demonstration dataset shown in the dashboard screenshot, not from real transactions.</sub>
 
-```mermaid
-pie showData title Ecosystem User Split (demo seed data)
-    "Seekers / Workers" : 17
-    "Service Providers" : 7
-    "Farmers" : 5
-    "System Admin" : 1
-```
+<div align="center">
+<img src="user-split.svg" alt="Ecosystem user split" width="800"/>
+</div>
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🏗️ Architecture
 
 <div align="center">
-<img src="assets/architecture.svg" alt="UdyogaSethu architecture" width="100%"/>
+<img src="architecture.svg" alt="UdyogaSethu architecture" width="100%"/>
 </div>
-
-```mermaid
-flowchart LR
-    subgraph Mobile["📱 Flutter Mobile App"]
-        W[Workers & Seekers]
-        F[Farmers]
-        C[Customers]
-    end
-    subgraph SB["☁️ Supabase Shared Backend"]
-        A[(Auth)]
-        DB[(PostgreSQL + PostGIS)]
-        RLS{{Row Level Security}}
-        EF[Edge Functions]
-    end
-    subgraph Admin["🖥️ UdyogaSethu Admin"]
-        UI[Vaadin Flow UI]
-        SEC[Spring Security]
-        SVC[Spring Boot Services]
-    end
-    W & F & C -->|HTTPS + user JWT| A
-    W & F & C --> RLS --> DB
-    UI --> SEC --> SVC -->|JDBC · HikariCP · admin role| DB
-    EF --> DB
-    classDef m fill:#0ea5e9,color:#fff,stroke:#0369a1
-    classDef s fill:#22c55e,color:#fff,stroke:#15803d
-    classDef a fill:#f59e0b,color:#fff,stroke:#b45309
-    class W,F,C m
-    class A,DB,RLS,EF s
-    class UI,SEC,SVC a
-```
 
 ### 🔁 Example: suspending an account end-to-end
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Worker as 📱 Worker (Flutter)
-    participant DB as ☁️ Supabase PostgreSQL
-    participant Admin as 🖥️ Admin Portal
-    Worker->>DB: Registers → profile created
-    Admin->>DB: Retrieves profile (shared database)
-    Admin->>Admin: Reviews account, clicks Suspend
-    Admin->>DB: Updates account status + writes audit log
-    Worker->>DB: App checks account status
-    DB-->>Worker: SUSPENDED
-    Worker->>Worker: Redirected to the suspended-account screen
-```
+<div align="center">
+<img src="suspend-flow.svg" alt="Suspending an account end-to-end" width="100%"/>
+</div>
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 📸 Screenshots
 
 > Screens below use **seeded demonstration data**.
 
 ### 🔐 Secure Sign-In
-<div align="center"><img src="docs/screenshots/01-login.png" alt="Login" width="100%"/></div>
+<div align="center"><img src="01-login.png" alt="Login" width="100%"/></div>
 
 ### 🧭 Overview Dashboard
 Eight live KPI cards, a 30-day platform activity trajectory and the ecosystem user split.
-<div align="center"><img src="docs/screenshots/02-dashboard.png" alt="Dashboard" width="100%"/></div>
+<div align="center"><img src="02-dashboard.png" alt="Dashboard" width="100%"/></div>
 
 <table>
 <tr>
-<td width="50%"><b>👥 User Management &amp; Account Governance</b><br/>Server-side paged registry with search, role filter and one-click suspend.<br/><img src="docs/screenshots/03-user-management.png" alt="User management"/></td>
-<td width="50%"><b>🧰 Worker &amp; Daily Wage Seeker Registry</b><br/>Skills, daily rates, ratings, jobs completed, licences and trust badges.<br/><img src="docs/screenshots/04-worker-registry.png" alt="Worker registry"/></td>
+<td width="50%"><b>👥 User Management &amp; Account Governance</b><br/>Server-side paged registry with search, role filter and one-click suspend.<br/><img src="03-user-management.png" alt="User management" width="100%"/></td>
+<td width="50%"><b>🧰 Worker &amp; Daily Wage Seeker Registry</b><br/>Skills, daily rates, ratings, jobs completed, licences and trust badges.<br/><img src="04-worker-registry.png" alt="Worker registry" width="100%"/></td>
 </tr>
 <tr>
-<td width="50%"><b>💼 Job Management &amp; Shift Oversight</b><br/>Postings, 150 m geofence parameters, slots filled and contract states.<br/><img src="docs/screenshots/05-job-management.png" alt="Job management"/></td>
-<td width="50%"><b>🌾 Produce Marketplace &amp; Crop Batches</b><br/>Crop listings, stock, reserved quantity, status and pause control.<br/><img src="docs/screenshots/06-produce-marketplace.png" alt="Produce marketplace"/></td>
+<td width="50%"><b>💼 Job Management &amp; Shift Oversight</b><br/>Postings, 150 m geofence parameters, slots filled and contract states.<br/><img src="05-job-management.png" alt="Job management" width="100%"/></td>
+<td width="50%"><b>🌾 Produce Marketplace &amp; Crop Batches</b><br/>Crop listings, stock, reserved quantity, status and pause control.<br/><img src="06-produce-marketplace.png" alt="Produce marketplace" width="100%"/></td>
 </tr>
 </table>
 
 ### 🪪 Identity &amp; KYC Verification Queue
 Aadhaar, PAN and Driving Licence reviews with **masked identifiers**. Biometric embeddings are never rendered.
-<div align="center"><img src="docs/screenshots/07-identity-kyc.png" alt="KYC queue" width="100%"/></div>
+<div align="center"><img src="07-identity-kyc.png" alt="KYC queue" width="100%"/></div>
 
 ### 🎙️ Voice Assistant &amp; Multi-AI Orchestrator Monitoring
 Telemetry across Groq, Gemini, OpenRouter, Deepgram and HuggingFace, plus Indic language distribution.
-<div align="center"><img src="docs/screenshots/08-voice-ai-monitoring.png" alt="Voice AI monitoring" width="100%"/></div>
+<div align="center"><img src="08-voice-ai-monitoring.png" alt="Voice AI monitoring" width="100%"/></div>
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🧩 Admin Modules
 
@@ -189,28 +144,13 @@ Telemetry across Groq, Gemini, OpenRouter, Deepgram and HuggingFace, plus Indic 
 | 9 | 📈 **Reports &amp; Audit Logs** | Track admin actions and maintain accountability |
 | 10 | 🛡️ **Admin Management &amp; Settings** | Manage admin accounts, role permissions and configuration |
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🔐 Security by Design
 
-```mermaid
-flowchart TD
-    U([Administrator]) --> L[Login · Spring Security + BCrypt]
-    L --> S[Secure session cookie + HTTP security headers]
-    S --> R{Role?}
-    R -->|SUPER_ADMIN| SA[Admin management · restricted settings]
-    R -->|ADMIN| OP[Operational management · permitted actions]
-    R -->|USER| X[⛔ No administrative access]
-    SA --> P["@PreAuthorize (method-level)"]
-    OP --> P
-    P --> DBR[Restricted DB role · column-level privileges]
-    DBR --> RLS[Supabase Row Level Security]
-    RLS --> LOG[(Audit log)]
-    classDef ok fill:#22c55e,color:#fff,stroke:#15803d
-    classDef bad fill:#ef4444,color:#fff,stroke:#b91c1c
-    class SA,OP,P,DBR,RLS,LOG ok
-    class X bad
-```
+<div align="center">
+<img src="security-flow.svg" alt="Security by design flow" width="800"/>
+</div>
 
 | Role | Responsibilities |
 |---|---|
@@ -228,7 +168,7 @@ flowchart TD
 - ✅ Secure session cookies, HTTP security headers, environment-based secrets
 - ✅ Audit logging for administrative actions
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🧪 Verification Status
 
@@ -245,7 +185,7 @@ flowchart TD
 | Maven authorisation tests | ✅ 13 passed, 0 failures |
 | SMS OTP / Google OAuth end-to-end | ⏳ Not yet tested |
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🛠️ Tech Stack
 
@@ -262,7 +202,7 @@ flowchart TD
 | Testing | JUnit, Spring Boot Test |
 | IDE | Antigravity |
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🚀 Getting Started
 
@@ -270,10 +210,11 @@ flowchart TD
 
 ```bash
 # 1. Clone
-git clone https://github.com/chethankp365/<your-repo-name>.git
-cd <your-repo-name>
+git clone https://github.com/chethankp365/UdyogaSethu-Admin.git
+cd UdyogaSethu-Admin
 
 # 2. Configure secrets via environment variables (never commit them)
+#    Copy .env.example for the full list of variables
 export SUPABASE_DB_URL="jdbc:postgresql://<host>:5432/postgres"
 export SUPABASE_DB_USER="<restricted-admin-db-role>"
 export SUPABASE_DB_PASSWORD="<password>"
@@ -287,9 +228,9 @@ mvn spring-boot:run
 
 Then open **http://localhost:8080** and sign in with an authorised admin account.
 
-> ⚠️ The variable names above are examples. Match them to the properties used in your `application.properties`. Use a **restricted database role**, never the Supabase service key.
+> ⚠️ The variable names above are examples. Match them to the properties used in your `application.properties` (see `.env.example`). Use a **restricted database role**, never the Supabase service key.
 
-<img src="assets/divider.svg" width="100%" alt=""/>
+<img src="divider.svg" width="100%" alt=""/>
 
 ## 🔭 Roadmap
 
@@ -313,7 +254,7 @@ UdyogaSethu is described in the paper **"UdyogaSethu: A Smart Digital Ecosystem 
 
 <br/>
 
-<img src="assets/logo.png" width="220" alt="UdyogaSethu"/>
+<img src="logo.png" width="220" alt="UdyogaSethu"/>
 
 <sub>Built with ☕ Java, 🌱 Supabase and a lot of purpose · bridging work, farms and people.</sub>
 
