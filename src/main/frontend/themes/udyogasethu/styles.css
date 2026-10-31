@@ -1,0 +1,245 @@
+/* ==============================================================================
+   UDYOGASETHU "SETU" (THE BRIDGE) DESIGN SYSTEM
+   Pristine White & Emerald Green Theme with Smooth Micro-Interactions
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Fonts */
+  --lumo-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', var(--lumo-font-family);
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Motion Tokens */
+  --us-duration-micro: 140ms;
+  --us-duration-std: 260ms;
+  --us-duration-lg: 450ms;
+  --us-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --us-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Setu White & Emerald Green Theme (Default) */
+  --us-bg-root: #F8FAFC;
+  --us-surface-1: #FFFFFF;
+  --us-surface-2: #F1F5F9;
+  --us-surface-card: #FFFFFF;
+  --us-border-subtle: #E2E8F0;
+  --us-border-focus: rgba(22, 163, 74, 0.6);
+
+  --us-primary: #16A34A;
+  --us-primary-dark: #15803D;
+  --us-primary-light: #DCFCE7;
+  --us-primary-glow: rgba(22, 163, 74, 0.15);
+  --us-setu-blue: #0284C7;
+  --us-amber: #D97706;
+  --us-red: #DC2626;
+  --us-text-main: #0F172A;
+  --us-text-muted: #64748B;
+
+  /* Lumo Overrides */
+  --lumo-base-color: #FFFFFF;
+  --lumo-primary-color: var(--us-primary);
+  --lumo-primary-color-50pct: rgba(22, 163, 74, 0.5);
+  --lumo-primary-color-10pct: rgba(22, 163, 74, 0.1);
+  --lumo-primary-text-color: var(--us-primary-dark);
+  --lumo-body-text-color: var(--us-text-main);
+  --lumo-secondary-text-color: var(--us-text-muted);
+}
+
+/* Reduced Motion Mode */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.reduced-motion *, .reduced-motion ::before, .reduced-motion ::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* White & Green Elevation Card Utility */
+.setu-card {
+  background: var(--us-surface-card);
+  border: 1px solid var(--us-border-subtle);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: transform var(--us-duration-std) var(--us-ease-out),
+              box-shadow var(--us-duration-std) var(--us-ease-out),
+              border-color var(--us-duration-std) var(--us-ease-out);
+}
+
+.setu-card:hover {
+  transform: translateY(-2px);
+  border-color: #86EFAC;
+  box-shadow: 0 10px 20px -3px rgba(22, 163, 74, 0.08), 0 4px 6px -4px rgba(22, 163, 74, 0.04);
+}
+
+/* KPI Count-Up Card */
+.kpi-metric-number {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2.1rem;
+  letter-spacing: -0.03em;
+  color: var(--us-text-main);
+}
+
+/* Status Chips */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status-chip-active, .status-chip-verified, .status-chip-open, .status-chip-delivered {
+  background: #DCFCE7;
+  color: #15803D;
+  border: 1px solid #86EFAC;
+}
+
+.status-chip-pending, .status-chip-review {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid #FCD34D;
+  animation: pulse-attention 2s infinite ease-in-out;
+}
+
+.status-chip-suspended, .status-chip-rejected, .status-chip-cancelled {
+  background: #FEE2E2;
+  color: #B91C1C;
+  border: 1px solid #FCA5A5;
+}
+
+/* DEMO Ribbon Badge */
+.demo-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    #D97706,
+    #D97706 8px,
+    #B45309 8px,
+    #B45309 16px
+  );
+  color: #FFFBEB;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.25);
+}
+
+/* Shimmer Skeleton Loader */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.4) 0%,
+    rgba(226, 232, 240, 0.8) 50%,
+    rgba(226, 232, 240, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite ease-in-out;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-attention {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(0.98); }
+}
+
+/* Sidebar Styling */
+.setu-sidebar {
+  background: #FFFFFF !important;
+  border-right: 1px solid var(--us-border-subtle);
+  transition: width var(--us-duration-std) var(--us-ease-out);
+}
+
+.setu-nav-item {
+  color: #334155;
+  border-radius: 8px;
+  margin: 2px 8px;
+  padding: 8px 12px;
+  transition: all var(--us-duration-micro) var(--us-ease-out);
+}
+
+.setu-nav-item:hover {
+  color: var(--us-primary-dark);
+  background: #F1F5F9;
+}
+
+.setu-nav-item[highlight] {
+  color: var(--us-primary-dark) !important;
+  background: #ECFDF5 !important;
+  border-left: 3px solid var(--us-primary);
+  font-weight: 600;
+}
+
+/* Vaadin Grid Refinement for White Theme */
+vaadin-grid {
+  border: 1px solid var(--us-border-subtle);
+  border-radius: 10px;
+  background: #FFFFFF;
+}
+
+vaadin-grid::part(header-cell) {
+  background: #F8FAFC;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--us-border-subtle);
+}
+
+vaadin-grid::part(cell) {
+  color: var(--us-text-main);
+  border-bottom: 1px solid #F1F5F9;
+}
+
+vaadin-grid::part(row):hover {
+  background: #F8FAFC;
+}
+
+/* Detail Drawer Overlay Styling */
+vaadin-dialog-overlay[theme~="detail-drawer"]::part(overlay) {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  border-radius: 0;
+  max-height: 100vh;
+  height: 100vh;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  border-left: 1px solid var(--us-border-subtle);
+  background: var(--us-surface-1);
+}
+
+vaadin-dialog-overlay[theme~="detail-drawer"]::part(content) {
+  padding: 0;
+  height: 100%;
+}
+
+/* Command Palette Backdrop */
+.command-palette-dialog {
+  border: 1px solid var(--us-border-subtle);
+  border-radius: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}

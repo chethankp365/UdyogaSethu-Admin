@@ -1,0 +1,59 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Local Environment Secrets & Keys ###
+.env
+.env.*
+!.env.example
+*.local
+*.pem
+*.key
+*.p12
+*.jks
+*.log
+*.dump
+dump.rdb
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradletaskcache/
+
+### VS Code ###
+.vscode/
+
+### Vaadin & Frontend ###
+node_modules/
+frontend/generated/
+package.json
+package-lock.json
+vite.generated.ts
+types.d.ts
+pnpm-lock.yaml
+pnpmfile.js
+webpack.config.js
+webpack.generated.js
+
+### OS Files ###
+.DS_Store
+Thumbs.db
+desktop.ini
