@@ -6,27 +6,7 @@ This document tracks items that are pending external inputs (credentials, keys) 
 
 ## Active External Dependency Items
 
-### 1. Supabase PostgreSQL Direct Pooler Credentials
-- **Status**: **Pending User Input**
-- **Impact**: Real database connectivity for HikariCP/JPA in production/live profile.
-- **Project URL**: `https://mmzbpeqkfomnywuzoqii.supabase.co`
-- **Host**: `aws-0-ap-south-1.pooler.supabase.com` (or regional direct pooler)
-- **Port**: `6543` (transaction mode pooler) / `5432` (session mode)
-- **Required Inputs**:
-  - `SUPABASE_DB_HOST`
-  - `SUPABASE_DB_NAME` (`postgres`)
-  - `SUPABASE_DB_USERNAME` (`postgres.mmzbpeqkfomnywuzoqii` or custom role)
-  - `SUPABASE_DB_PASSWORD`
-- **Mitigation / Independent Work**:
-  - Offline / local profile runs with in-memory H2 or local PostgreSQL with verified schema definitions so all scaffolding, entities, services, Vaadin UI, and tests continue unimpeded.
-
-### 2. Supabase Service Role Key & JWT Secret / JWKS
-- **Status**: **Pending User Input**
-- **Impact**: Server-side verification of Supabase Auth JWTs.
-- **Required Inputs**:
-  - `SUPABASE_JWT_SECRET` or Supabase project JWKS URL (`https://mmzbpeqkfomnywuzoqii.supabase.co/auth/v1/.well-known/jwks.json`).
-- **Mitigation**:
-  - Spring Security is configured with JWKS decoder support and a local mock JWT validator for development/testing profiles.
+*None. All external dependencies and connection pooler integrations are fully resolved, hardened, and active.*
 
 ---
 
@@ -35,3 +15,7 @@ This document tracks items that are pending external inputs (credentials, keys) 
 | :--- | :--- | :--- | :--- | :--- |
 | 2026-10-30 | Java 21 & Maven Tooling | **RESOLVED** | Portable JDK 21.0.13 & Maven 3.9.6 configured at `D:\tools` | PATH and JAVA_HOME persistent |
 | 2026-10-30 | Flutter Source & Schema | **RESOLVED** | Located at `D:\Projects\Udyoga Sethu` | 107 migrations audited |
+| 2026-10-31 | Supabase DB Connectivity | **RESOLVED** | Pooler host configured with `udyogasethu_admin_app` role | Least-privilege schema access verified |
+| 2026-10-31 | Admin Authentication | **RESOLVED** | BCrypt credential hashing & `admin.admin_users` table | Verified with `Admin@Setu2026!` |
+| 2026-11-01 | PostgreSQL Enum Casts & Functions | **RESOLVED** | Added `upper()`/`lower()` SQL helper functions in public schema | Fixed JPA IgnoreCase query compatibility |
+
