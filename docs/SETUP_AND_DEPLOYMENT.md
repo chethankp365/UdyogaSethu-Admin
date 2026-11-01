@@ -45,24 +45,38 @@ The resulting executable JAR will be located at `target/udyogasethu-admin-1.0.0-
 
 ---
 
-## 4. Production Deployment & Environment Variables
+## 4. Production Deployment on Render & Environment Variables
 
-When running in production, set the active Spring profile and provide Supabase connection details:
+This application runs as a Java 21 web service on Render. Supabase remains the
+shared PostgreSQL backend used by this admin application and the companion
+mobile application; Render does not replace or copy the database.
 
-```bash
-export SPRING_PROFILES_ACTIVE=prod
-export PORT=8080
+### Deploy with the Render Blueprint
 
-# Supabase PostgreSQL Connection Pooler
-export SUPABASE_DB_HOST="aws-0-ap-south-1.pooler.supabase.com"
-export SUPABASE_DB_PORT=6543
-export SUPABASE_DB_NAME="postgres"
-export SUPABASE_DB_USERNAME="postgres.mmzbpeqkfomnywuzoqii"
-export SUPABASE_DB_PASSWORD="your_database_password"
+1. Push this repository to GitHub.
+2. In Render, choose **New → Blueprint** and select the repository.
+3. Render detects `render.yaml` and builds the Docker image using `Dockerfile`.
+4. Enter the values for every environment variable marked `sync: false`.
+5. Use the Supabase **session pooler** credentials for the deployment. Keep the
+   database password and bootstrap password in Render's environment settings,
+   never in the repository.
 
-# Initial Super Admin Bootstrapping
-export SUPERADMIN_EMAIL="admin@udyogasethu.org"
-export SUPERADMIN_NAME="Platform Administrator"
+Render supplies `PORT` automatically. The application listens on that port and
+uses `/actuator/health` for the Render health check.
 
-java -jar target/udyogasethu-admin-1.0.0-SNAPSHOT.jar
+Configure the Supabase values from the shared project's **Connect → Session
+pooler** panel:
+
+```text
+SUPABASE_DB_HOST=your-project-ref.pooler.supabase.com
+SUPABASE_DB_PORT=6543
+SUPABASE_DB_NAME=postgres
+SUPABASE_DB_USERNAME=postgres.your-project-ref
+SUPABASE_DB_PASSWORD=your_database_password
+SUPERADMIN_EMAIL=admin@udyogasethu.org
+SUPERADMIN_NAME=Platform Administrator
+SUPERADMIN_PASSWORD=your_initial_secure_superadmin_password
 ```
+
+Do not use the placeholder values above. The exact pooler hostname and
+username must come from the shared Supabase project.
